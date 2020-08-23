@@ -1,9 +1,11 @@
+const env = require('../envloader');
+
 module.exports = {
   mongo: {
-    host: process.env.DB_HOST || 'localhost',
-    port: +process.env.DB_PORT || 27017,
-    name: process.env.DB_NAME || 'crawler',
-    user: process.env.DB_USER || 'crawler',
-    pass: process.env.DB_PASS || 'crawler',
+    host: env.get('DB_HOST', 'localhost'),
+    port: env.get('DB_PORT', 27017),
+    name: env.get('DB_NAME', 'crawler'),
+    user: env.get('DB_USER', 'crawler'),
+    pass: env.get('DB_PASS', 'crawler'),
   }
 };

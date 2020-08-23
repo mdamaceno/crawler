@@ -1,9 +1,10 @@
-require('dotenv').config({
-  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
-});
-
+const { Config } = require('@adonisjs/config/build/standalone');
+const appConfig = require('./app');
 const databaseConfig = require('./database');
 
-module.exports = {
+const initConfig = {
+  app: appConfig,
   database: databaseConfig,
 };
+
+module.exports = new Config(initConfig);
