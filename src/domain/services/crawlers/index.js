@@ -1,3 +1,14 @@
-const mercadolivre = require('./mercado-livre');
+const mock = require('./mock');
+const crawler = require('./crawler');
 
-module.exports = { mercadolivre };
+const config = require('../../../config');
+
+let crawl;
+
+if (config.get('app.env') === 'test') {
+  crawl = mock;
+} else {
+  crawl = crawler;
+}
+
+module.exports = { crawl };
