@@ -1,0 +1,23 @@
+version: "3.7"
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  mongo:
+    image: mongo:4.2-bionic
+    # tmpfs: /data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo --quiet
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    # restart: always
+    hostname: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker/db:/data/db
+    networks:
+      - default
