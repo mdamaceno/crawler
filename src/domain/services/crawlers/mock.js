@@ -2,7 +2,7 @@ const faker = require('faker');
 
 faker.locale = 'pt_BR';
 
-module.exports = async (_, __ = '') => {
+module.exports = async () => {
   const products = [];
 
   for (let index = 0; index < 50; index++) {

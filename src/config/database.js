@@ -7,5 +7,5 @@ module.exports = {
     name: env.get('DB_NAME', 'crawler'),
     user: env.get('DB_USER', 'crawler'),
     pass: env.get('DB_PASS', 'crawler'),
-  }
+  },
 };
