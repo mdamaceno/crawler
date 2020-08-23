@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "lint": "eslint *.js .",
+    "lint:fix": "eslint --fix *.js .",
+    "test": "NODE_ENV=test jest --detectOpenHandles"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",
