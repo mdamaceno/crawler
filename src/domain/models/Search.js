@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dataSources = require('../enums/data-sources');
 
-const ProductSchema = new mongoose.Schema(
+const SearchSchema = new mongoose.Schema(
   {
     word: { type: String, required: true },
     source: {
@@ -22,4 +22,4 @@ const ProductSchema = new mongoose.Schema(
   { versionKey: false, timestamps: true }
 );
 
-module.exports = mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('Search', SearchSchema);
