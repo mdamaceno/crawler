@@ -10,6 +10,8 @@ module.exports = function ({ crawl }) {
     if (!search) {
       const { products } = await crawl(SOURCE_NAME, searchData.search);
 
+      if (!products.length) return [];
+
       search = await Search.create({
         word: searchData.search,
         source: SOURCE_NAME.toUpperCase(),
