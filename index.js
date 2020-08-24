@@ -1,3 +1,4 @@
 const server = require('./src/server');
+const config = require('./src/config');
 
-server.listen(9000);
+server.listen(config.get('app.listenPort'));
