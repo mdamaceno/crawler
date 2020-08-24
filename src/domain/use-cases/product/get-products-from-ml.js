@@ -15,7 +15,9 @@ module.exports = function ({ crawl }) {
       search = await Search.create({
         word: searchData.search,
         source: SOURCE_NAME.toUpperCase(),
-        products,
+        products: products.filter((product) => {
+          return product.name && product.price && product.link;
+        }),
       });
     }
 
