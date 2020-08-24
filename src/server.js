@@ -1,12 +1,10 @@
 const express = require('express');
 require('express-async-errors');
+const routes = require('./app/routes');
 
 const server = express();
 
 server.use(express.json());
-
-server.post('/', function (req, res) {
-  console.log(req.body)
-});
+server.use(routes);
 
 module.exports = server;
