@@ -1,4 +1,5 @@
 const { Search } = require('../../models');
+const validate = require('./validators/get-products-from-ml');
 
 const SOURCE_NAME = 'mercadolivre';
 
@@ -19,5 +20,5 @@ module.exports = function ({ crawl }) {
     return search.products.slice(0, searchData.limit);
   }
 
-  return ({ searchData }) => handle(searchData);
+  return ({ searchData }) => handle(validate(searchData));
 };

@@ -16,32 +16,87 @@ beforeEach(async () => {
 afterAll(async () => db.connection.close());
 
 describe('POST /search', () => {
-  it('retrieves products', async () => {
-    const INPUT = {
-      search: 'test',
-    };
+  describe('success', () => {
+    it('retrieves products', async () => {
+      const INPUT = {
+        search: 'test',
+      };
 
-    const { body } = await request(server)
-      .post('/search')
-      .send(INPUT)
-      .set('Accept', 'application/json')
-      .expect(200);
+      const { body } = await request(server)
+        .post('/search')
+        .send(INPUT)
+        .set('Accept', 'application/json')
+        .expect(200);
 
-    expect(body.length).toBeGreaterThan(0);
+      expect(body.length).toBeGreaterThan(0);
+    });
+
+    it('retrieves products with limit', async () => {
+      const INPUT = {
+        search: 'test',
+        limit: 13,
+      };
+
+      const { body } = await request(server)
+        .post('/search')
+        .send(INPUT)
+        .set('Accept', 'application/json')
+        .expect(200);
+
+      expect(body.length).toBe(13);
+    });
   });
 
-  it('retrieves products with limit', async () => {
-    const INPUT = {
-      search: 'test',
-      limit: 13,
-    };
+  describe('fail', () => {
+    it('limit is less than 0', async () => {
+      const INPUT = {
+        search: 'test',
+        limit: -1,
+      };
 
-    const { body } = await request(server)
-      .post('/search')
-      .send(INPUT)
-      .set('Accept', 'application/json')
-      .expect(200);
+      await request(server)
+        .post('/search')
+        .send(INPUT)
+        .set('Accept', 'application/json')
+        .expect(422);
+    });
 
-    expect(body.length).toBe(13);
+    it('limit is not a number', async () => {
+      const INPUT = {
+        search: 'test',
+        limit: 'abc',
+      };
+
+      await request(server)
+        .post('/search')
+        .send(INPUT)
+        .set('Accept', 'application/json')
+        .expect(422);
+    });
+
+    it('search is not a string', async () => {
+      const INPUT = {
+        search: 1,
+        limit: 1,
+      };
+
+      await request(server)
+        .post('/search')
+        .send(INPUT)
+        .set('Accept', 'application/json')
+        .expect(422);
+    });
+
+    it('search is undefined', async () => {
+      const INPUT = {
+        limit: 1,
+      };
+
+      await request(server)
+        .post('/search')
+        .send(INPUT)
+        .set('Accept', 'application/json')
+        .expect(422);
+    });
   });
 });
