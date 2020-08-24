@@ -16,7 +16,7 @@ module.exports = function ({ crawl }) {
       });
     }
 
-    return search.products;
+    return search.products.slice(0, searchData.limit);
   }
 
   return ({ searchData }) => handle(searchData);

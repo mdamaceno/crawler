@@ -2,7 +2,8 @@ const { getProductsFromML } = require('../../domain/use-cases');
 
 module.exports = {
   search: async ({ body }, res) => {
-    const products = await getProductsFromML({ searchData: body.search });
+    const { search, limit } = body;
+    const products = await getProductsFromML({ searchData: { search, limit } });
     return res.json(products);
   },
 };

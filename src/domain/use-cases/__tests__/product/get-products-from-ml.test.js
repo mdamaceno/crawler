@@ -55,5 +55,15 @@ describe('getProductsFromML', () => {
       expect(products.length).toBe(1);
       expect(products[0].name).toBe(searchCreated.products[0].name);
     });
+
+    it('retrieves products with limit', async () => {
+      const WORD = 'test';
+
+      const products = await getProductsFromML({
+        searchData: { search: WORD, limit: 21 },
+      });
+
+      expect(products.length).toBe(21);
+    });
   });
 });

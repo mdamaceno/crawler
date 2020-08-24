@@ -29,4 +29,19 @@ describe('POST /search', () => {
 
     expect(body.length).toBeGreaterThan(0);
   });
+
+  it('retrieves products with limit', async () => {
+    const INPUT = {
+      search: 'test',
+      limit: 13,
+    };
+
+    const { body } = await request(server)
+      .post('/search')
+      .send(INPUT)
+      .set('Accept', 'application/json')
+      .expect(200);
+
+    expect(body.length).toBe(13);
+  });
 });
